@@ -26,6 +26,15 @@ namespace SSH_Server_Manager.Presentation
             var viewModel = DataContext as MainViewModel;
             DataContext = vm;
             InitializeComponent();
+            MenuItem root = new MenuItem() { Title = "Menu" };
+            root.Items.Add(new MenuItem() { Title = "subM" });
+            MenuItem childItem1 = new MenuItem() { Title = "Child item #1" };
+            childItem1.Items.Add(new MenuItem() { Title = "Child item #1.1" });
+            childItem1.Items.Add(new MenuItem() { Title = "Child item #1.2" });
+            root.Items.Add(childItem1);
+            root.Items.Add(new MenuItem() { Title = "Child item #2" });
+            trvMenu.Items.Add(root);
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

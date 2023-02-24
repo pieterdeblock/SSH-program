@@ -22,6 +22,8 @@ namespace SSH_Server_Manager.Presentation
         private string user = "";
         private string password = "";
         private MenuItem dirTree = new MenuItem();
+        private List<String> subGroups= new List<String>() { "Poes", "Sloeber"};
+        private List<String> entries = new List<String>() { "Dogs", "Cats" };
         public string RemoteClient
         { 
             get => remoteclient;
@@ -43,6 +45,24 @@ namespace SSH_Server_Manager.Presentation
             private set => SetProperty(ref dirTree, value);
         }
 
+        public List<String> SubGroups { get => subGroups ; set => SetProperty(ref subGroups, value); }
+
+        public List<String> Entries { get => entries; set => SetProperty(ref entries, value); }
+
+        public IList<object> Items
+        {
+            get
+            {
+                IList<object> childNodes = new List<object>();
+                foreach (var group in this.SubGroups)
+                    childNodes.Add(group);
+                foreach (var entry in this.Entries)
+                    childNodes.Add(entry);
+
+                return childNodes;
+            }
+        }
+
         public MainViewModel(ILogic logic)
         {
             this.logic = logic;
@@ -52,20 +72,7 @@ namespace SSH_Server_Manager.Presentation
         private void GetFiles()
         {
             logic.listFiles(RemoteClient, User, Password, "/");
-            DirTree = new MenuItem() { Title = "Menu" };
-            foreach (var item in logic.listFiles(RemoteClient, User, Password, "/"))
-                DirTree.Items.Add(new MenuItem() { Title = item });
+           
         }
     }
-}
-public class MenuItem
-{
-    public MenuItem()
-    {
-        this.Items = new ObservableCollection<MenuItem>();
-    }
-
-    public string Title { get; set; }
-
-    public ObservableCollection<MenuItem> Items { get; set; }
 }
