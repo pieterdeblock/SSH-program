@@ -30,7 +30,8 @@ namespace SSH_Server_Manager
         {
             services.AddTransient<MainViewModel>();
             services.AddSingleton<MainWindow>();
-            services.AddTransient<ILogic, Logic>();
+            services.AddTransient<IFile, File>();
+            services.AddTransient<IShell, Shell>();
         }
 
         protected override void OnStartup(StartupEventArgs e)

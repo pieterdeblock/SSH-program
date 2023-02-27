@@ -5,30 +5,46 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SSH_Server_Manager.Presentation"
       Title="{Binding Title}" Height="600" Width="800">
-    <StackPanel Margin="15">
-        <DockPanel>
-            <StackPanel DockPanel.Dock="Left" Orientation="Vertical" HorizontalAlignment="Left">
-                <StackPanel  Orientation="Horizontal" >
+    <Window.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:FileTree}" ItemsSource="{Binding}">
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <StackPanel>
+                        <TextBlock Text="{Binding ParentFolder}" Margin="5"/>
+                        <TextBlock Text="{Binding Children}" Margin="5"/>
+                    </StackPanel>
+                </TreeViewItem.Header>
+            </TreeViewItem>
+        </HierarchicalDataTemplate>
+    </Window.Resources>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom" Margin="1">
+            <StackPanel HorizontalAlignment="Left">
+                <TextBlock Text="Status:" Margin="5" TextAlignment="Left"/>
+                <TextBlock Text="{Binding ConnectionSFTP}" Margin="5" TextAlignment="Left"/>
+                <TextBlock Text="{Binding ConnectionSSH}" Margin="5" TextAlignment="Left"/>
+                <TextBlock Text="{Binding ConnectionTime}" Margin="5" TextAlignment="Left"/>
+                <TextBlock Text="{Binding ConnectionHost}" Margin="5" TextAlignment="Left"/>
+            </StackPanel>
+        </StatusBar>
+        <WrapPanel VerticalAlignment="Top">
+            <WrapPanel>
+                <StackPanel  Orientation="Vertical"  >
                     <TextBlock Text="SSH Host: " />
-                    <TextBox x:Name="HostTextBox" Text="{Binding RemoteClient, Mode=TwoWay}"  Width="50"/>
-                </StackPanel>
-                <StackPanel  Orientation="Horizontal">
                     <TextBlock Text="USer: " />
-                    <TextBox x:Name="UserTextBox" Text="{Binding User, Mode=TwoWay}"  Width="50"/>
-                </StackPanel>
-                <StackPanel  Orientation="Horizontal">
                     <TextBlock Text="SSH Host: " />
+                </StackPanel>
+                <StackPanel  Orientation="Vertical">
+                    <TextBox x:Name="HostTextBox" Text="{Binding RemoteClient, Mode=TwoWay}"  Width="50"/>
+                    <TextBox x:Name="UserTextBox" Text="{Binding User, Mode=TwoWay}"  Width="50"/>
                     <TextBox x:Name="PasswordTextBox" Text="{Binding Password, Mode=TwoWay}"  Width="50"/>
                 </StackPanel>
-                <Button Name="Button1" Content="Connect" Command="{Binding ConnectCommand}" Width="50"/>
-            </StackPanel>
-            <TreeView Name="trvMenu">
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type MenuItem}" ItemsSource="{Binding Items}">
-                        <TextBlock Text="{Binding Title}" />
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </DockPanel>
-    </StackPanel>
+            </WrapPanel>
+            <WrapPanel>
+                <Button x:Name="Button1" Content="Connect" Command="{Binding ConnectCommand}" Width="50"/>
+                <Button x:Name="Button2" Content="Test" Command="{Binding TestCommand}" Width="50"/>
+            </WrapPanel>
+        </WrapPanel>
+        <TreeView x:Name="treeView"  Margin="10"/>
+    </DockPanel>
 </Window>

@@ -24,22 +24,16 @@ namespace SSH_Server_Manager.Presentation
         public MainWindow(MainViewModel vm)
         {
             var viewModel = DataContext as MainViewModel;
-            DataContext = vm;
+            DataContext = vm; 
             InitializeComponent();
-            MenuItem root = new MenuItem() { Title = "Menu" };
-            root.Items.Add(new MenuItem() { Title = "subM" });
-            MenuItem childItem1 = new MenuItem() { Title = "Child item #1" };
-            childItem1.Items.Add(new MenuItem() { Title = "Child item #1.1" });
-            childItem1.Items.Add(new MenuItem() { Title = "Child item #1.2" });
-            root.Items.Add(childItem1);
-            root.Items.Add(new MenuItem() { Title = "Child item #2" });
-            trvMenu.Items.Add(root);
-
+            List<FileTree> files = new List<FileTree> { new FileTree { Children = "child1", ParentFolder = "parent1" }, new FileTree { Children = "child2", ParentFolder = "parent2" } };
+            treeView.ItemsSource = files;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var viewModel = DataContext as MainViewModel;
             if (viewModel.ConnectCommand.CanExecute(null)) viewModel.ConnectCommand.Execute(null);
+            if(viewModel.TestCommand.CanExecute(null)) viewModel.TestCommand.Execute(null);
         }
     }
 }

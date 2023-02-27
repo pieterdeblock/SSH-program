@@ -50,6 +50,9 @@
     <Reference Include="Microsoft.Toolkit.Mvvm, Version=7.1.0.0, Culture=neutral, PublicKeyToken=4aff67a105548ee2, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Toolkit.Mvvm.7.1.2\lib\netstandard2.0\Microsoft.Toolkit.Mvvm.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Renci.SshNet, Version=2020.0.2.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2020.0.2\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
@@ -103,8 +106,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ILogic.cs" />
-    <Compile Include="Models\Logic.cs" />
+    <Compile Include="Models\IFile.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\IShell.cs" />
+    <Compile Include="Models\Shell.cs" />
+    <Compile Include="Models\UserData.cs" />
+    <Compile Include="Presentation\FileTree.cs" />
     <Compile Include="Presentation\MainViewModel.cs" />
     <Compile Include="Presentation\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
