@@ -111,12 +111,11 @@
     <Compile Include="Models\IShell.cs" />
     <Compile Include="Models\Shell.cs" />
     <Compile Include="Models\UserData.cs" />
-    <Compile Include="Presentation\FileTree.cs" />
+    <Compile Include="Presentation\Item.cs" />
     <Compile Include="Presentation\MainViewModel.cs" />
     <Compile Include="Presentation\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

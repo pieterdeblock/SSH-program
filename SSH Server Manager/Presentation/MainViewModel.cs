@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using Newtonsoft.Json;
+using static SSH_Server_Manager.Presentation.DirectoryItem;
 
 namespace SSH_Server_Manager.Presentation
 {
@@ -34,41 +35,25 @@ namespace SSH_Server_Manager.Presentation
         private Stopwatch _stopwatch = new Stopwatch();
         private int seconds = 0;
         private string connectionHost = "";
-        public string RemoteClient
-        { 
-            get => remoteclient;
-            set => SetProperty(ref remoteclient, value);
-        }
-        public string User
-        {
-            get => user;
-            set => SetProperty(ref user, value);
-        }
-        public string Password
-        {
-            get => password;
-            set => SetProperty(ref password, value);
-        }
-        public TreeView DirTree
-        {
-            get => dirTree;
-            private set => SetProperty(ref dirTree, value);
-        }
+        private List<Item> _dirItems;
 
+        public string RemoteClient { get => remoteclient; set => SetProperty(ref remoteclient, value); }
+        public string User { get => user; set => SetProperty(ref user, value); }
+        public string Password { get => password; set => SetProperty(ref password, value); }
+        public TreeView DirTree { get => dirTree; private set => SetProperty(ref dirTree, value); }
         public String ConnectionSFTP { get => connectionSFTP; private set => SetProperty(ref connectionSFTP, value); }
         public String ConnectionSSH { get => connectionSSH; private set => SetProperty(ref connectionSSH, value); }
-
         public String ConnectionTime { get => connectionTime; private set => SetProperty(ref connectionTime, value); }
-
         public String ConnectionHost { get => connectionHost; private set => SetProperty(ref connectionHost, value); }
-
-
+        public List<Item> DirItems { get => _dirItems;  set => SetProperty(ref _dirItems, value); }
 
         public MainViewModel(IFile logic, IShell shell)
         {
             this.logic = logic;
             this.shell = shell;
             //_userData = ReadJSONfile();
+            var itemProvider = new ItemProvider();
+            DirItems = itemProvider.DirItems;
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += TimerTick;
             ConnectCommand = new RelayCommand(async () => await MakeConections());

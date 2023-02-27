@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using static SSH_Server_Manager.Presentation.DirectoryItem;
 
 namespace SSH_Server_Manager.Presentation
 {
@@ -26,8 +27,6 @@ namespace SSH_Server_Manager.Presentation
             var viewModel = DataContext as MainViewModel;
             DataContext = vm; 
             InitializeComponent();
-            List<FileTree> files = new List<FileTree> { new FileTree { Children = "child1", ParentFolder = "parent1" }, new FileTree { Children = "child2", ParentFolder = "parent2" } };
-            treeView.ItemsSource = files;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
